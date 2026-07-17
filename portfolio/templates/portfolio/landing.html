@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen bg-win98-teal p-4 md:p-6 text-sm text-black select-none relative overflow-hidden">
+
+    <!-- shortcuts -->
+    <div class="grid grid-flow-col auto-cols-max md:grid-flow-row md:auto-rows-max justify-start gap-4 md:gap-6 w-full md:w-24 mb-4 md:mb-0">
+        <div class="flex flex-col items-center justify-center text-center cursor-pointer group w-20 md:w-auto" onclick="openWindow('win-about')">
+            <div class="w-10 h-10 flex items-center justify-center text-2xl filter drop-shadow-md">
+                ℹ️
+            </div>
+            <span class="text-white text-xs mt-1 bg-black/30 px-1 group-focus:bg-win98-blue group-focus:outline-dotted group-focus:outline-1 truncate max-w-full">
+                About_Me
+            </span>
+        </div>
+
+        <div class="flex flex-col items-center justify-center text-center cursor-pointer group w-20 md:w-auto" onclick="openWindow('win-projects')">
+            <div class="w-10 h-10 flex items-center justify-center text-2xl filter drop-shadow-md">
+                📁
+            </div>
+            <span class="text-white text-xs mt-1 bg-black/30 px-1 group-focus:bg-win98-blue group-focus:outline-dotted group-focus:outline-1 truncate max-w-full">
+                My_Projects
+            </span>
+        </div>
+
+        <div class="flex flex-col items-center justify-center text-center cursor-pointer group w-20 md:w-auto" onclick="openWindow('win-resume')">
+            <div class="w-10 h-10 flex items-center justify-center text-2xl filter drop-shadow-md">
+                📄
+            </div>
+            <span class="text-white text-xs mt-1 bg-black/30 px-1 group-focus:bg-win98-blue group-focus:outline-dotted group-focus:outline-1 truncate max-w-full">
+                Resume.txt
+            </span>
+        </div>
+
+        <div class="flex flex-col items-center justify-center text-center cursor-pointer group w-20 md:w-auto" onclick="openWindow('win-contact')">
+            <div class="w-10 h-10 flex items-center justify-center text-2xl filter drop-shadow-md">
+                ✉️
+            </div>
+            <span class="text-white text-xs mt-1 bg-black/30 px-1 group-focus:bg-win98-blue group-focus:outline-dotted group-focus:outline-1 truncate max-w-full">
+                Contact_Me
+            </span>
+        </div>
+    </div>
+
+
+
+    <!-- about-->
+    <div id="win-about" class="window hidden fixed md:absolute top-4 bottom-14 left-2 right-2 md:bottom-auto md:left-1/4 w-auto md:w-full md:max-w-md bg-win98-gray p-1 shadow-win-out z-10 flex flex-col">
+        <div class="bg-win98-blue text-white px-2 py-1 flex justify-between items-center cursor-move window-header shrink-0">
+            <span class="font-bold flex items-center gap-1 truncate">ℹ️ About_Me.txt</span>
+            <button onclick="closeWindow('win-about')" class="bg-win98-gray text-black px-1.5 font-black border shadow-win-out active:shadow-win-in text-xs">X</button>
+        </div>
+        <div class="flex gap-2 text-xs py-1 px-1 border-b border-gray-400 shrink-0">
+            <span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>H</u>elp</span>
+        </div>
+        <div class="bg-white m-1 p-4 shadow-win-in flex-1 overflow-y-auto text-black font-mono">
+            <p class="font-bold text-lg mb-2">Hi, I'm Jess!</p>
+        <p class="leading-relaxed">
+    I’m a full-stack developer who enjoys turning messy problems into clean, functional software.
+    My journey into tech started with curiosity and grew through years of experience in technical support,
+    IT solutions, and software development. Along the way, I discovered a passion for building tools
+    that make people’s work easier and more efficient. </p>
+
+   <p> I specialize in building web applications with Python, Django, JavaScript, and modern cloud technologies.
+    I’ve created everything from client portals and payment systems to automation tools that transform
+    complicated processes into simple, reliable workflows.
+       </p>
+
+   <p>  When I’m not writing code, you can usually find me exploring new places, collecting retro consoles,
+    playing tennis, or starting my next project. </p>
+
+   <p>  Thanks for stopping by my little corner of the internet — feel free to look around and see what I’ve been building!
+</p>
+        </div>
+    </div>
+
+    <!-- projects -->
+    <div id="win-projects" class="window hidden fixed md:absolute top-4 bottom-14 left-2 right-2 md:bottom-auto md:left-1/3 w-auto md:w-full md:max-w-lg bg-win98-gray p-1 shadow-win-out z-10 flex flex-col">
+        <div class="bg-win98-blue text-white px-2 py-1 flex justify-between items-center cursor-move window-header shrink-0">
+            <span class="font-bold flex items-center gap-1">📁 C:\My_Projects</span>
+            <button onclick="closeWindow('win-projects')" class="bg-win98-gray text-black px-1.5 font-black border shadow-win-out active:shadow-win-in text-xs">X</button>
+        </div>
+        <div class="flex items-center gap-2 text-xs p-1 bg-win98-gray border-b border-gray-400 shrink-0">
+            <span class="text-gray-500">Address</span>
+            <div class="bg-white shadow-win-in px-2 py-0.5 flex-1 text-xs border truncate">C:\My_Projects</div>
+        </div>
+
+        <div class="bg-white m-1 p-4 shadow-win-in flex-1 overflow-y-auto text-black">
+            <p class="text-xs text-gray-500 mb-3 hidden md:block">Double-click any program/folder icon below to execute.</p>
+            <p class="text-xs text-gray-500 mb-3 md:hidden">Tap any program/folder icon below to execute.</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {% for project in projects %}
+                <div class="flex flex-col items-center p-2 rounded hover:bg-win98-blue/10 cursor-pointer text-center select-none"
+                     onclick="handleProjectClick(event, 'project-{{ project.id }}')"
+                     ondblclick="openWindow('project-{{ project.id }}')">
+                    <div class="text-3xl">💻</div>
+                    <span class="text-xs font-bold mt-1 text-black truncate max-w-full">
+                        {{ project.title }}
+                    </span>
+                </div>
+                {% empty %}
+                <p class="text-xs text-gray-500 col-span-2 sm:col-span-3">No projects found. Launch the Django admin panel to add some!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- resume stuff -->
+    <div id="win-resume" class="window hidden fixed md:absolute top-4 bottom-14 left-2 right-2 md:bottom-auto md:left-1/3 w-auto md:w-full md:max-w-md bg-win98-gray p-1 shadow-win-out z-10 flex flex-col">
+        <div class="bg-win98-blue text-white px-2 py-1 flex justify-between items-center cursor-move window-header shrink-0">
+            <span class="font-bold flex items-center gap-1">📄 Resume.txt</span>
+            <button onclick="closeWindow('win-resume')" class="bg-win98-gray text-black px-1.5 font-black border shadow-win-out active:shadow-win-in text-xs">X</button>
+        </div>
+        <div class="bg-white m-1 p-4 shadow-win-in flex-1 overflow-y-auto text-black font-mono">
+            <h3 class="font-bold text-base border-b border-black pb-1">EXPERIENCE</h3>
+            <p class="font-bold text-xs mt-2">Full Stack / Cloud Software Developer | Present</p>
+            <ul class="list-disc pl-4 text-xs mt-1 space-y-1">
+                <li>Results-driven Software Developer with proven expertise in designing, building, and deploying scalable web applications and cloud infrastructure.</li>
+                <li>Specialized in Python/Django backend development, PostgreSQL database management, and Google Cloud Platform (GCP) architecture.</li>
+                <li>Experienced in implementing secure API integrations, payment processing workflows, and automated pipeline deployments.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- contact info -->
+    <div id="win-contact" class="window hidden fixed md:absolute top-4 bottom-14 left-2 right-2 md:bottom-auto md:left-1/4 w-auto md:w-full md:max-w-md bg-win98-gray p-1 shadow-win-out z-10 flex flex-col">
+        <div class="bg-win98-blue text-white px-2 py-1 flex justify-between items-center cursor-move window-header shrink-0">
+            <span class="font-bold flex items-center gap-1">✉️ Contact_Me.exe</span>
+            <button onclick="closeWindow('win-contact')" class="bg-win98-gray text-black px-1.5 font-black border shadow-win-out active:shadow-win-in text-xs">X</button>
+        </div>
+        <div class="bg-white m-1 p-4 shadow-win-in flex-1 overflow-y-auto text-black font-mono">
+            <p class="text-xs mb-3">Shoot me an email, or check out my networks:</p>
+            <div class="space-y-2 text-xs">
+                <div>📬 <strong class="underline">Email:</strong> jwallcodes@gmail.com</div>
+                <div>🖥️ <strong class="underline">GitHub:</strong> https://github.com/jwallaballa</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- projects -->
+    {% for project in projects %}
+    <div id="project-{{ project.id }}" class="window hidden fixed md:absolute top-8 bottom-16 left-4 right-4 md:bottom-auto md:left-1/3 w-auto md:w-full md:max-w-sm bg-win98-gray p-1 shadow-win-out z-20 flex flex-col">
+        <div class="bg-win98-blue text-white px-2 py-1 flex justify-between items-center cursor-move window-header shrink-0">
+            <span class="font-bold flex items-center gap-1 truncate">💻 {{ project.title }}.exe</span>
+            <button onclick="closeWindow('project-{{ project.id }}')" class="bg-win98-gray text-black px-1.5 font-black border shadow-win-out active:shadow-win-in text-xs">X</button>
+        </div>
+        <div class="flex gap-2 text-xs py-1 px-1 border-b border-gray-400 shrink-0">
+            <span><u>F</u>ile</span>
+            <span><u>V</u>iew</span>
+            <span class="text-gray-500 truncate">Timeline: {{ project.timeline }}</span>
+        </div>
+        <div class="bg-white m-1 p-4 shadow-win-in flex-1 overflow-y-auto text-black">
+            <div class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">{{ project.role }}</div>
+            <h2 class="text-xl font-bold mb-2">{{ project.subtitle }}</h2>
+            <hr class="border-t border-dashed border-gray-300 my-2" />
+            <p class="text-xs leading-relaxed">{{ project.description|linebreaksbr }}</p>
+        </div>
+        <div class="flex justify-between items-center mt-1 px-1 text-xs shrink-0">
+            <div class="shadow-win-in px-2 py-0.5 bg-win98-gray w-full mr-1 truncate">Ready</div>
+            <div class="shadow-win-in px-2 py-0.5 bg-win98-gray whitespace-nowrap font-bold text-win98-blue">{{ project.impact_metric }}</div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- windows taskbar -->
+    <div class="fixed bottom-0 left-0 right-0 h-10 bg-win98-gray border-t-2 border-white shadow-win-out flex items-center justify-between px-1 z-50">
+        <div class="flex items-center gap-2 min-w-0">
+            <button class="font-bold bg-win98-gray px-3 py-1 flex items-center gap-1 border-2 border-white shadow-win-out active:shadow-win-in font-black shrink-0">
+                🏁 Start
+            </button>
+            {% if latest_thought %}
+            <div class="shadow-win-in bg-white/50 text-xs px-2 py-1 h-6 flex items-center flex-1 md:max-w-sm overflow-hidden border">
+                <marquee scrollamount="2" behavior="scroll" direction="left">
+                    💭 JessOS 97: "{{ latest_thought.phrase }}"
+                </marquee>
+            </div>
+            {% endif %}
+        </div>
+        <div class="shadow-win-in px-2 md:px-3 py-1 text-xs bg-win98-gray flex items-center gap-1 md:gap-2 font-bold shrink-0">
+            <span class="hidden sm:inline">🔊</span> 🕒 <span id="desktop-clock">12:00 PM</span>
+        </div>
+    </div>
+</div>
+
+
+<script>
+let topZIndex = 30;
+
+function openWindow(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.classList.remove('hidden');
+        bringToFront(element);
+    }
+}
+
+function closeWindow(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.classList.add('hidden');
+    }
+}
+
+function bringToFront(element) {
+    topZIndex++;
+    element.style.zIndex = topZIndex;
+}
+
+
+function handleProjectClick(event, windowId) {
+    if (window.innerWidth < 768) {
+        openWindow(windowId);
+    }
+}
+
+document.querySelectorAll('.window').forEach(win => {
+    win.addEventListener('mousedown', () => {
+        bringToFront(win);
+    });
+    win.addEventListener('touchstart', () => {
+        bringToFront(win);
+    });
+});
+
+setInterval(() => {
+    document.getElementById('desktop-clock').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+}, 1000);
+</script>
+{% endblock %}
