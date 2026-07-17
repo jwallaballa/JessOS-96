@@ -1,1 +1,101 @@
+# -----------------------
+# Python
+# -----------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python package/build files
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+
+# -----------------------
+# Django
+# -----------------------
+
+# Local database
+db.sqlite3
+db.sqlite3-journal
+
+# Django static/media
+staticfiles/
+media/
+
+# Django environment files
 .env
+.env.*
+
+# Logs
+*.log
+
+# Django cache
+*.mo
+*.pot
+
+
+# -----------------------
+# Secrets
+# -----------------------
+
+# Environment variables
+*.env
+
+# Credentials
+*.pem
+*.key
+credentials.json
+*-credentials.json
+
+# Google Cloud
+gcp-creds.json
+
+
+# -----------------------
+# PyCharm / JetBrains
+# -----------------------
+
+.idea/
+
+# PyCharm project files
+*.iml
+
+# -----------------------
+# OS
+# -----------------------
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+
+# -----------------------
+# Node (if using Tailwind/Vite/etc.)
+# -----------------------
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
